@@ -1,0 +1,98 @@
+openapi: 3.0.0
+info:
+  title: Swagger open api
+  description: this is demo swagger open api
+  version: 1.0.0
+servers:
+  - url: https://zing.vn
+    description: product server
+  - url: http://bongdaso.vn
+    description: dev server
+  - url: http://localhost:8080
+    description: local server
+tags:
+  - name: pet
+    description: Everything about Pets
+  - name: user
+paths:
+  /pet/getAll:
+    get:
+      tags:
+        - pet
+      description: Get all pet
+      operationId: getAllPet
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
+  /pet/{id}:
+    get:
+      tags:
+        - pet
+      description: get pet by id
+      operationId: findById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: find one available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '400':
+          description: invalid id
+        '404':
+          description: not found available Pet
+  /pet/createPet:
+    post:
+      tags:
+        - user
+      operationId: createNewPet
+      requestBody:
+        description: create new pet
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pet'
+        required: true
+      responses:
+        '200':
+          description: create pet successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+components:
+  schemas:
+    Pet:
+      type: object
+      required:
+        - name
+        - id
+      properties:
+        id:
+          type: integer
+          minimum: 0
+          maximum: 13
+        name:
+          type: string
+        status:
+          type: string
+          enum:
+            - available
+            - pending
+            - sold
+
