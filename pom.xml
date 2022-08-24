@@ -72,6 +72,8 @@
                             <generatorName>spring</generatorName>
                             <apiPackage>com.openapi3.controller</apiPackage>
                             <modelPackage>com.openapi3.model</modelPackage>
+                            <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
+                            <library>spring-boot</library>
                             <configOptions>
                                 <delegatePattern>true</delegatePattern>
                             </configOptions>
